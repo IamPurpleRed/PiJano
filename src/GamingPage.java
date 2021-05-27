@@ -90,89 +90,89 @@ public class GamingPage extends JPanel {
             {
                 if (str[i].charAt(0) == '1') //如果該行第一個字元為1，設定o1資料，並呼叫function
                 {
-                    o1.setValue(490, time, 1);
+                    o1.setValue(600, time, 1);
                     block_1();
                 } else
                     o1.setValue(-200, 0, 0); //如果該行第一個字元是0，設定o1資料至視窗外面
                 if (str[i].charAt(1) == '1') //如果該行第2個字元為1，設定o2資料，並呼叫function
                 {
-                    o2.setValue(690, time, 1);
+                    o2.setValue(800, time, 1);
                     block_2();
                 } else
                     o2.setValue(-200, 0, 0); //如果該行第一個字元是0，設定o2資料至視窗外面
                 if (str[i].charAt(2) == '1') //如果該行第一個字元為1，設定o3資料，並呼叫function
                 {
-                    o3.setValue(890, time, 1);
+                    o3.setValue(1000, time, 1);
                     block_3();
                 } else
                     o3.setValue(-200, 0, 0); //如果該行第一個字元是0，設定o3資料至視窗外面
                 if (str[i].charAt(3) == '1') //如果該行第一個字元為1，設定o4資料，並呼叫function
                 {
-                    o4.setValue(1090, time, 1);
+                    o4.setValue(1200, time, 1);
                     block_4();
                 } else
                     o4.setValue(-200, 0, 0); //如果該行第一個字元是0，設定o4資料至視窗外面
             } else if (i % 4 == 1) //以下都同上
             {
                 if (str[i].charAt(0) == '1') {
-                    o5.setValue(490, time, 1);
+                    o5.setValue(600, time, 1);
                     block_5();
                 } else
                     o5.setValue(-200, 0, 0);
                 if (str[i].charAt(1) == '1') {
-                    o6.setValue(690, time, 1);
+                    o6.setValue(800, time, 1);
                     block_6();
                 } else
                     o6.setValue(-200, 0, 0);
                 if (str[i].charAt(2) == '1') {
-                    o7.setValue(890, time, 1);
+                    o7.setValue(1000, time, 1);
                     block_7();
                 } else
                     o7.setValue(-200, 0, 0);
                 if (str[i].charAt(3) == '1') {
-                    o8.setValue(1090, time, 1);
+                    o8.setValue(1200, time, 1);
                     block_8();
                 } else
                     o8.setValue(-200, 0, 0);
             } else if (i % 4 == 2) {
                 if (str[i].charAt(0) == '1') {
-                    o9.setValue(490, time, 1);
+                    o9.setValue(600, time, 1);
                     block_9();
                 } else
                     o9.setValue(-200, 0, 0);
                 if (str[i].charAt(1) == '1') {
-                    o10.setValue(690, time, 1);
+                    o10.setValue(800, time, 1);
                     block_10();
                 } else
                     o10.setValue(-200, 0, 0);
                 if (str[i].charAt(2) == '1') {
-                    o11.setValue(890, time, 1);
+                    o11.setValue(1000, time, 1);
                     block_11();
                 } else
                     o11.setValue(-200, 0, 0);
                 if (str[i].charAt(3) == '1') {
-                    o12.setValue(1090, time, 1);
+                    o12.setValue(1200, time, 1);
                     block_12();
                 } else
                     o12.setValue(-200, 0, 0);
             } else if (i % 4 == 3) {
                 if (str[i].charAt(0) == '1') {
-                    o13.setValue(490, time, 1);
+                    o13.setValue(600, time, 1);
                     block_13();
                 } else
                     o13.setValue(-200, 0, 0);
                 if (str[i].charAt(1) == '1') {
-                    o14.setValue(690, time, 1);
+                    o14.setValue(800, time, 1);
                     block_14();
                 } else
                     o14.setValue(-200, 0, 0);
                 if (str[i].charAt(2) == '1') {
-                    o15.setValue(890, time, 1);
+                    o15.setValue(1000, time, 1);
                     block_15();
                 } else
                     o15.setValue(-200, 0, 0);
                 if (str[i].charAt(3) == '1') {
-                    o16.setValue(1090, time, 1);
+                    o16.setValue(1200, time, 1);
                     block_16();
                 } else
                     o16.setValue(-200, 0, 0);
@@ -184,7 +184,7 @@ public class GamingPage extends JPanel {
 
     public void readfile() {
         try {
-            FileReader fr = new FileReader("sheet.txt");
+            FileReader fr = new FileReader("src/sheet.txt");
             BufferedReader br = new BufferedReader(fr);
             while (true) {
                 str[counter] = br.readLine();
