@@ -5,14 +5,9 @@ import java.awt.event.*;
 public class BetaStart extends JPanel implements ActionListener {
 
     MainFrame frame;
-    GamingPage panel;
-    Dimension screen_Size = Toolkit.getDefaultToolkit().getScreenSize();
 
     Timer timer = new Timer(100, this);
-    /*
-    int posx = screen_Size.width / 2 - this.getSize().width / 2;
-    int posy = screen_Size.height / 2 - this.getSize().height / 2;
-    */
+
     int posx = -20;
     int posy = 410;
     int vx = 10;
