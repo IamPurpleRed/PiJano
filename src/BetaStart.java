@@ -25,7 +25,7 @@ public class BetaStart extends JPanel implements ActionListener {
     JFrame begin;
 
     BetaStart() {
-
+        System.out.println("dqwdq");
         label = new JLabel(new ImageIcon("src/img/start.png"));
         label1 = new JLabel(new ImageIcon("src/img/t.png"));
         label.setSize(1600, 1000);
