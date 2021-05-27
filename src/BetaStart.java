@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import javax.imageio.*;
 
 public class BetaStart extends JPanel implements ActionListener {
 
@@ -25,7 +24,6 @@ public class BetaStart extends JPanel implements ActionListener {
     JFrame begin;
 
     BetaStart() {
-
         label = new JLabel(new ImageIcon("src/img/start.png"));
         label1 = new JLabel(new ImageIcon("src/img/t.png"));
         label.setSize(1600, 1000);
