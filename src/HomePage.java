@@ -60,7 +60,7 @@ public class HomePage extends JPanel {
         start_btn.setBounds(1200, 200, 234, 150);
         start_btn.setOpaque(false); // 顯示出來
         start_btn.setContentAreaFilled(false); // 背景透明
-        //start_btn.setBorderPainted(false); // 除去button邊框
+        start_btn.setBorderPainted(false); // 除去button邊框
         start_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Main.PiJano.removePage(Main.PiJano.current, "GamingPage");

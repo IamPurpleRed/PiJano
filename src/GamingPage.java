@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
@@ -12,17 +13,33 @@ public class GamingPage extends JPanel {
     int current_load = 4; // 前四行已initial//load行
     int dead_line_y = 1200;
     Stroke stroke1 = new BasicStroke(6f);
+    JLabel Mogu_pos = new JLabel(new ImageIcon("src/img/MOGU.png"));
 
     GamingPage() {
-        JLayeredPane layeredPane = new JLayeredPane(); // 新建一個分層器
+        setLayout(null);
         JLabel back = new JLabel(new ImageIcon("src/img/bg_GamingPage.png"));
         back.setOpaque(true);
+        back.setBounds(0, 0, 1600, 1000);
         back.setBackground(new Color(0x123456));
-        this.add(back);
-        layeredPane.add(this, JLayeredPane.DEFAULT_LAYER); // 將背景圖放在最底層
+
+        setMOGU(635, 830);
+
+        add(Mogu_pos);
+        add(back);
+
         readfile(); //read sheet.txt to str array
         initial();
         check_if_buttom();
+    }
+
+    public void setMOGU(int x, int y) {
+        /*
+            第一軌道: 635,830
+            第二軌道: 835,830
+            第三軌道: 1035,830
+            第四軌道: 1235,830
+        */
+        Mogu_pos.setBounds(x, y, 100, 100);
     }
 
     public void initial() {
@@ -32,7 +49,7 @@ public class GamingPage extends JPanel {
             for (int at = 0; at < 4; at++) {
                 objects[at + 4 * line] = new Stuff();
                 if (str[i].charAt(at) == '1') {
-                    objects[at + 4 * line].set_value(490 + (200 * at), time, 1);
+                    objects[at + 4 * line].set_value(615 + (200 * at), time, 1);
                 } else {
                     objects[at + 4 * line].set_value(-200, time, 1);
                 }
@@ -119,7 +136,7 @@ public class GamingPage extends JPanel {
                     if (objects[line * 4].ypos >= dead_line_y) {
                         for (int track = 0; track < 4; track++) {
                             if (str[current_load].charAt(track) == '1') {
-                                objects[track + 4 * line].set_value(490 + 200 * track, 0, 1);
+                                objects[track + 4 * line].set_value(615 + 200 * track, 0, 1);
                             } else {
                                 objects[track + 4 * line].set_value(-200, 0, 1);
                             }
