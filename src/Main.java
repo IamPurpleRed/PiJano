@@ -1,6 +1,7 @@
 public class Main {
-    public static void main(String[] args) {
+    public static MainFrame PiJano;
 
-        new HomePage();
+    public static void main(String[] args) {
+        PiJano = new MainFrame();
     }
 }
