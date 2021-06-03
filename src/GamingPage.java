@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 import java.util.Timer;
+
 public class GamingPage extends JPanel {
     final int block_interval = 100;
     final int block_number = (1000/block_interval + 3) * 4;
@@ -94,8 +95,7 @@ public class GamingPage extends JPanel {
             if(drawblock[i])
                 objects[i].paintBlock(g);
         }
-        if(index > 0)
-            paintline(g);
+        paintline(g);
         paintMyScore(g);
         paintCombo(g);
         paintEnemyScore(g);
@@ -129,8 +129,8 @@ public class GamingPage extends JPanel {
         String score = "S C O R E";
         g2d_1.drawString(score, 90, 800);
     }
-    public void paintline(Graphics g)
-    {
+
+    public void paintline(Graphics g) {
         Stroke stroke2 = new BasicStroke(150f);
         Graphics2D g2d_1 = (Graphics2D) g;
         g2d_1.setColor(Color.ORANGE);
@@ -140,6 +140,7 @@ public class GamingPage extends JPanel {
             g2d_1.drawLine((int)objects[trail_number.get(i)].xpos, (int)objects[trail_number.get(i)].ypos, (int)objects[trail_number.get(i + 1)].xpos, (int)objects[trail_number.get(i + 1)].ypos);
         }
     }
+
     public void paintCombo(Graphics g) {
         Graphics2D g2d_1 = (Graphics2D) g;
         g2d_1.setColor(Color.black);
@@ -153,6 +154,15 @@ public class GamingPage extends JPanel {
         Timer t3 = new Timer();
         TimerTask check_y = new TimerTask(){
             public void run() {
+                if(index > 0)
+                {
+                    if(objects[trail_number.get(0)].ypos>= dead_line_y)
+                    {
+                        drawblock[trail_number.get(0)] = true;
+                        trail_number.remove(0);
+                        index--;
+                    }
+                }
                 repaint();
                 for (int i = 0; i < counter; i++) {
                     int line = i % (block_number/4);                                   //第i列資料
