@@ -14,12 +14,12 @@ class Stuff extends JComponent {
         this.speed = _speed;
     }
 
-    public void paintComponent(Graphics g) { // 左邊數過來第一個行
+    public void paintBlock(Graphics g) { // 左邊數過來第一個行
         Graphics2D g2d_1 = (Graphics2D) g;
         g2d_1.setColor(Color.CYAN);
         g2d_1.setStroke(stroke1);
         g2d_1.setPaint(Color.CYAN);
-        Rectangle2D.Double rect1 = new Rectangle2D.Double(xpos, ypos, 150, 50); // 宣告2D長方形才能用小數點
+        Rectangle2D.Double rect1 = new Rectangle2D.Double(xpos, ypos, 130, 40); // 宣告2D長方形才能用小數點
         g2d_1.fill(rect1); // 畫圖案
     }
 }

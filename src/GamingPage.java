@@ -5,13 +5,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 import java.util.Timer;
-
 public class GamingPage extends JPanel {
-    Stuff[] objects = new Stuff[16];
-    String[] str = new String[100];
+    final int block_interval = 100;
+    final int block_number = (1000/block_interval + 3) * 4;
+    final int dead_line_y = 1000 + block_interval;
+    int current_load = block_number/4;
+    ArrayList <Integer> trail_number = new ArrayList<Integer>();
+    Stuff objects[] = new Stuff[block_number];
+    String str[] = new String[100];
+    boolean drawblock[] = new boolean[block_number];
+    int index = 0;
     int counter = 0;
-    int current_load = 4; // 前四行已initial//load行
-    int dead_line_y = 1200;
+    int status = 0;
+    double fall_speed = 1.5;
     Stroke stroke1 = new BasicStroke(6f);
     JLabel Mogu_pos = new JLabel(new ImageIcon("src/img/MOGU.png"));
 
@@ -43,19 +49,24 @@ public class GamingPage extends JPanel {
     }
 
     public void initial() {
+        for(int i=0;i < block_number;i++)
+        {
+            drawblock[i] = true;
+        }
         double time = 0;
-        for (int i = 0; i < 4; i++) {
-            int line = i % 4;
-            for (int at = 0; at < 4; at++) {
+        for(int line = 0; line < block_number/4; line++)
+        {
+            for(int at = 0; at < 4; at++){
                 objects[at + 4 * line] = new Stuff();
-                if (str[i].charAt(at) == '1') {
-                    objects[at + 4 * line].set_value(615 + (200 * at), time, 1);
-                } else {
-                    objects[at + 4 * line].set_value(-200, time, 1);
+                if(str[line].charAt(at)=='1'){
+                    objects[at + 4 * line].set_value(585 + (200 * at), time,fall_speed);
+                }
+                else {
+                    objects[at + 4 * line].set_value(-200, time,fall_speed);
                 }
                 block(objects[at + 4 * line]);
             }
-            time -= 300;
+            time -= block_interval;
         }
     }
 
@@ -79,10 +90,12 @@ public class GamingPage extends JPanel {
         Graphics2D g2D = (Graphics2D) g;
         super.paint(g);
 
-        for (int i = 0; i < 16; i++) {
-            objects[i].paintComponent(g);
+        for(int i = 0; i < block_number; i++){
+            if(drawblock[i])
+                objects[i].paintBlock(g);
         }
-
+        if(index > 0)
+            paintline(g);
         paintMyScore(g);
         paintCombo(g);
         paintEnemyScore(g);
@@ -116,7 +129,17 @@ public class GamingPage extends JPanel {
         String score = "S C O R E";
         g2d_1.drawString(score, 90, 800);
     }
-
+    public void paintline(Graphics g)
+    {
+        Stroke stroke2 = new BasicStroke(150f);
+        Graphics2D g2d_1 = (Graphics2D) g;
+        g2d_1.setColor(Color.ORANGE);
+        g2d_1.setStroke(stroke2);
+        for(int i=0;i< index-1;i++)
+        {
+            g2d_1.drawLine((int)objects[trail_number.get(i)].xpos, (int)objects[trail_number.get(i)].ypos, (int)objects[trail_number.get(i + 1)].xpos, (int)objects[trail_number.get(i + 1)].ypos);
+        }
+    }
     public void paintCombo(Graphics g) {
         Graphics2D g2d_1 = (Graphics2D) g;
         g2d_1.setColor(Color.black);
@@ -128,17 +151,33 @@ public class GamingPage extends JPanel {
 
     public void check_if_buttom() {
         Timer t3 = new Timer();
-        TimerTask check_y = new TimerTask() {
+        TimerTask check_y = new TimerTask(){
             public void run() {
                 repaint();
-                for (int i = 0; i < 4; i++) {
-                    int line = i % 4;
-                    if (objects[line * 4].ypos >= dead_line_y) {
-                        for (int track = 0; track < 4; track++) {
-                            if (str[current_load].charAt(track) == '1') {
-                                objects[track + 4 * line].set_value(615 + 200 * track, 0, 1);
-                            } else {
-                                objects[track + 4 * line].set_value(-200, 0, 1);
+                for (int i = 0; i < counter; i++) {
+                    int line = i % (block_number/4);                                   //第i列資料
+                    if (objects[line * 4].ypos >= dead_line_y)
+                    {
+                        for (int track = 0; track < 4; track++)
+                        {
+                            if(str[current_load].charAt(track) == '2')
+                            {
+                                if(index >= (block_number/4)){
+                                    trail_number.remove(0);
+                                    index--;
+                                }
+                                trail_number.add(track + 4 * line);
+                                objects[track + 4 * line].set_value(660 + 200 * track, -180, fall_speed);
+                                index++;
+                                drawblock[track + 4 * line] = false;
+                            }
+                            else if (str[current_load].charAt(track) == '1')
+                            {
+                                objects[track + 4 * line].set_value(585 + 200 * track, -200, fall_speed);
+                            }
+                            else if(str[current_load].charAt(track) == '0')
+                            {
+                                objects[track + 4 * line].set_value(-200, -200, fall_speed);
                             }
                         }
                         current_load++;
@@ -146,6 +185,6 @@ public class GamingPage extends JPanel {
                 }
             }
         };
-        t3.schedule(check_y, 0, 5);
+        t3.schedule(check_y, 0,5);
     }
 }
