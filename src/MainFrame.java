@@ -1,11 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.TimerTask;
+import java.util.Timer;
 
 public class MainFrame extends JFrame {
     public static Dimension frame_size = new Dimension(1600, 1000);
     public static Dimension user_size = Toolkit.getDefaultToolkit().getScreenSize();
     public JPanel current;
+    public controlls ps4;
+    public Timer exchange;//交換資訊
 
     MainFrame() {
         setTitle("P i J a n o");
@@ -56,10 +60,32 @@ public class MainFrame extends JFrame {
     public void switchToHomePage() {
         current = new HomePage();
         add(current);
+
     }
 
     public void switchToGamingPage() {
         current = new GamingPage();
         add(current);
+        ps4 = new controlls();
+        exchange = new Timer();
+        exchange.schedule( exchangeFunc, 0,1);//每50毫秒做do_controller
     }
+
+    public TimerTask exchangeFunc=new TimerTask()
+    {
+        public void run()
+		 {
+            //current.mushroom = ps4.mushroom;//蘑菇頭位置(指針)
+            //current.score = ps4.score;//分數
+            //current.status = ps4.status;// perfect,good,bad,nothing
+
+            for(int i=0;i<3;i++)
+            {
+                //ps4.target_buttons[i]=current.
+               // ps4.now_position_y=current.upper_position;
+            }
+           
+            
+		}
+    };
 }
