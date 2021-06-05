@@ -8,7 +8,7 @@ import java.util.Timer;
 
 public class GamingPage extends JPanel {
 
-    final int block_interval = 100;
+    final int block_interval = 110;
     final int block_number = (1000 / block_interval + 3) * 4;
     final int dead_line_y = 1000 + block_interval;
     int current_load = block_number / 4;
@@ -21,29 +21,38 @@ public class GamingPage extends JPanel {
     int status = 0;
     double fall_speed = 1.5;
     Stroke stroke1 = new BasicStroke(6f);
-    JLabel Mogu_pos = new JLabel(new ImageIcon("src/img/MOGU.png"));
+    JLabel back = new JLabel();
+    JLabel Mogu_pos = new JLabel();
     JLabel Score_img = new JLabel();
+    JLabel rec = new JLabel();
     JLabel MyScore = new JLabel();
+    public Integer score;
+    public String perfect;
+    public Integer mushroom;
 
     GamingPage() {
         setLayout(null);
-        JLabel back = new JLabel(new ImageIcon("src/img/bg_GamingPage.png"));
+        back = new JLabel(new ImageIcon("src/img/bg_GamingPage.png"));
         back.setOpaque(true);
         back.setBounds(0, 0, 1600, 1000);
         back.setBackground(new Color(0x123456));
 
-        for (int i = 595; i <= 1325; i++) {
-            setMOGU(i, 830);
-            add(Mogu_pos);
+        for (int i = 0; i < 4; i++) {
+            rec = new JLabel(new ImageIcon("src/img/rect.png"));
+            rec.setBounds(590 + 200 * i, 865, 200, 50);
+            add(rec);
         }
-        String[] t = { "perfect", "good", "bad" };
-        for (int i = 0; i < 3; i++) {
-            displayScoreImg(t[i]);
-            add(Score_img);
-        }
+
+        setMOGU(mushroom);
+        add(Mogu_pos);
+
+        displayScoreImg(perfect);
+        add(Score_img);
+
         add(back);
-        paintMyScore();
-        add(MyScore);
+
+        PaintScore();
+
         readfile(); //read sheet.txt to str array
         initial();
         check_if_buttom();
@@ -56,18 +65,23 @@ public class GamingPage extends JPanel {
             @Override
             public void run() {
 
+                MyScore.setText(score.toString());
+                MyScore.setForeground(Color.BLACK);
+                MyScore.setFont(new Font("Comic Sans MC", Font.BOLD, 100));
+                MyScore.setBounds(90, 200, 500, 500);
+
             }
         };
-        s.schedule(ss, 0, 2000);
+        s.schedule(ss, 0, 1);
     }
 
-    public void displayScoreImg(String score) {
+    public void displayScoreImg(String perfect) {
         //schedule(TimerTask task, long delay, long period)： 在特定 delay 後重複執行
         Timer t6 = new Timer();
         TimerTask check_score = new TimerTask() {
 
             public void run() {
-                switch (score) {
+                switch (perfect) {
                     case "perfect":
                         ImageIcon p = new ImageIcon("src/img/perfect.png");
                         Score_img.setIcon(p);
@@ -84,10 +98,10 @@ public class GamingPage extends JPanel {
                 Score_img.setBounds(300, 600, 300, 300);
             }
         };
-        t6.schedule(check_score, 0, 100);
+        t6.schedule(check_score, 0, 1);
     }
 
-    public void setMOGU(int x, int y) {
+    public void setMOGU(Integer mush) {
         /*
             第一軌道: 635,830
             第二軌道: 835,830
@@ -98,10 +112,10 @@ public class GamingPage extends JPanel {
         Timer t5 = new Timer();
         TimerTask check_MOGU = new TimerTask() {
             public void run() {
-                Mogu_pos.setBounds(x, y, 100, 100);
+                Mogu_pos.setBounds(mush, 830, 100, 100);
             }
         };
-        t5.schedule(check_MOGU, 0, 100);
+        t5.schedule(check_MOGU, 0, 1);
 
     }
 
@@ -114,7 +128,7 @@ public class GamingPage extends JPanel {
             for (int at = 0; at < 4; at++) {
                 objects[at + 4 * line] = new Stuff();
                 if (str[line].charAt(at) == '1') {
-                    objects[at + 4 * line].set_value(595 + (200 * at), time, fall_speed);
+                    objects[at + 4 * line].set_value(615 + (200 * at), time, fall_speed);
                 } else {
                     objects[at + 4 * line].set_value(-200, time, fall_speed);
                 }
@@ -149,9 +163,9 @@ public class GamingPage extends JPanel {
                 objects[i].paintBlock(g);
         }
         paintline(g);
-
-        paintCombo(g);
-        paintEnemyScore(g);
+        PaintScore();
+        //paintCombo(g);
+        //paintEnemyScore(g);
     }
 
     public void block(Stuff object) {
@@ -163,20 +177,6 @@ public class GamingPage extends JPanel {
             }
         };
         t2.schedule(ttt, 0, 5);
-    }
-
-    public void paintMyScore() {
-        Timer t4 = new Timer();
-        TimerTask temp = new TimerTask() {
-            public void run() {
-                MyScore.setText("1000");
-                MyScore.setForeground(Color.BLACK);
-                MyScore.setFont(new Font("Comic Sans MC", Font.BOLD, 60));
-                MyScore.setBounds(90, 200, 500, 500);
-
-            }
-        };
-        t4.schedule(temp, 0, 2000);
     }
 
     public void paintEnemyScore(Graphics g) {
@@ -234,7 +234,7 @@ public class GamingPage extends JPanel {
                                 index++;
                                 drawblock[track + 4 * line] = false;
                             } else if (str[current_load].charAt(track) == '1') {
-                                objects[track + 4 * line].set_value(585 + 200 * track, -200, fall_speed);
+                                objects[track + 4 * line].set_value(615 + 200 * track, -200, fall_speed);
                             } else if (str[current_load].charAt(track) == '0') {
                                 objects[track + 4 * line].set_value(-200, -200, fall_speed);
                             }
