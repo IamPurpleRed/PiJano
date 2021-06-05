@@ -16,7 +16,8 @@ public class HomePage extends JPanel {
         int game_name_x_speed = 3;
         int game_name_y_speed = 5;
 
-        public void actionPerformed(ActionEvent e) {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
             if (loadingText_x < 1190 || loadingText_x > 1280) {
                 loadingText_x_speed *= -1;
             }
@@ -34,11 +35,12 @@ public class HomePage extends JPanel {
 
             loading_text.setBounds(loadingText_x, loadingText_y, 500, 100);
             game_name.setBounds(game_name_x, game_name_y, 580, 150);
+
         }
     }
 
     JLabel background = new JLabel(new ImageIcon("src/img/bg_homepage.png"));
-    JLabel game_name = new JLabel();;
+    JLabel game_name = new JLabel();
     JLabel loading_gif = new JLabel(new ImageIcon("src/img/loading.gif"));
     JLabel loading_text = new JLabel();
     JLabel bottomwave_gif = new JLabel(new ImageIcon("src/img/bottomwave.gif"));
@@ -53,8 +55,8 @@ public class HomePage extends JPanel {
         loading_gif.setBounds(1300, 650, 240, 240);
         loading_text.setText("L o a d i n g . . .");
         loading_text.setFont(new Font("Lemon Tuesday", Font.ROMAN_BASELINE, 60));
-        bottomwave_gif.setBounds(50, 700, 1000, 400);
         loading_text.setForeground(Color.WHITE);
+        bottomwave_gif.setBounds(50, 700, 1000, 400);
 
         start_btn.setIcon(new ImageIcon("src/img/roller.png"));
         start_btn.setBounds(1200, 200, 234, 150);
@@ -62,8 +64,10 @@ public class HomePage extends JPanel {
         start_btn.setContentAreaFilled(false); // 背景透明
         start_btn.setBorderPainted(false); // 除去button邊框
         start_btn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Main.PiJano.removePage(Main.PiJano.current, "GamingPage");
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                new FileChecker();
+                Main.PiJano.removePage(Main.PiJano.current, "SelectPage");
             }
         });
 
