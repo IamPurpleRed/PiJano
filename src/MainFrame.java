@@ -11,8 +11,6 @@ public class MainFrame extends JFrame {
     public String now_playing;
     public MusicPlayer mp;
 
-    public Controlls ps4;
-
     MainFrame() {
         setTitle("P i J a n o");
         setSize(frame_size);
@@ -24,7 +22,6 @@ public class MainFrame extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE); // 關閉視窗即退出程式
 
-        ps4 = new Controlls();
     }
 
     public void switchTo(String target) {
@@ -60,6 +57,7 @@ public class MainFrame extends JFrame {
 
     public void switchToGamingPage() {
         mp = new MusicPlayer("YEEYEEYEEYEEYEE");
+
         current = new GamingPage();
         add(current);
     }
