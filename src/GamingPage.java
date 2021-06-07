@@ -8,7 +8,7 @@ import java.util.Timer;
 public class GamingPage extends JPanel {
     final int block_interval = 110;         //TODO: 有改，鈺修負責 
     final int block_number = (1000 / block_interval + 3) * 4;
-    final int dead_line_y = 1000 + block_interval;
+    final int dead_line_y = 1000 + block_interval ;
     int current_load = block_number / 4;
     ArrayList<Integer> trail_number = new ArrayList<Integer>();
     Stuff objects[] = new Stuff[block_number];
@@ -275,7 +275,7 @@ public class GamingPage extends JPanel {
 
                 upper_str_ypos = (int) objects[temp].ypos+40;
                // upper_str_ypos = 919 - (int) objects[temp].ypos;
-                if (objects[temp].ypos == 929) {
+                if (objects[temp].ypos >= 929) {
                     upper_str = str[cur];
                     temp += 4;
                     cur++;
@@ -285,7 +285,7 @@ public class GamingPage extends JPanel {
                 if (temp >= block_number)
                     temp = 0;
                 if (index > 0) {
-                    if (objects[trail_number.get(0)].ypos >= dead_line_y) {
+                    if (objects[trail_number.get(0)].ypos >= dead_line_y-50) {
                         drawblock[trail_number.get(0)] = true;
                         trail_number.remove(0);
                         index--;
@@ -303,7 +303,7 @@ public class GamingPage extends JPanel {
                                         index--;
                                     }
                                     trail_number.add(track + 4 * line);
-                                    objects[track + 4 * line].set_value(660 + 200 * track, -180, fall_speed);
+                                    objects[track + 4 * line].set_value(660 + 200 * track, -200, fall_speed);
                                     index++;
                                     drawblock[track + 4 * line] = false;
                                 } else if (str[current_load].charAt(track) == '1') {

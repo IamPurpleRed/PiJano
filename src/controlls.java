@@ -81,7 +81,7 @@ public class controlls {
 			
 			//System.out.println(status+" "+mushroom+" "+if_scored);
 			//System.out.println(mushroom+" "+c+" "+old_id.toString()+" "+data+" "+count+" "+if_LB+" "+if_RB);
-			System.out.println(score+" "+target_buttons[0]+""+target_buttons[1]+""+target_buttons[2]+""+target_buttons[3]);
+			System.out.println(score+" "+target_buttons[0]+""+target_buttons[1]+""+target_buttons[2]+""+target_buttons[3]+" "+if_have_stuff+" "+if_scored);
 			//System.out.println();//WTF
 			//System.out.println(score+" "+now_position_y);
 			controller.poll();//to event//
@@ -261,7 +261,7 @@ public class controlls {
 						}
 					}
 					
-			if(now_position_y < line_y)//整個超出範圍，在這裡target要換下一排 
+			if(now_position_y < line_y+20)//整個超出範圍，在這裡target要換下一排 
 			{
 						if_have_stuff=false;
 						shift_next_line();
