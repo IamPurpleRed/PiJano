@@ -55,7 +55,7 @@ public class MainFrame extends JFrame {
     }
 
     public void switchToGamingPage() {
-        mp = new MusicPlayer("YEEYEEYEEYEEYEE");
+        mp = new MusicPlayer(now_playing);
         current = new GamingPage();
         add(current);
     }
