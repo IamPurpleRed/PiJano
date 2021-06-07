@@ -66,7 +66,7 @@ public class HomePage extends JPanel {
         start_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-               // new FileChecker();
+                new FileChecker();
                 Main.PiJano.removePage(Main.PiJano.current, "SelectPage");
             }
         });

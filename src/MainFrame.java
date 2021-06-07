@@ -21,7 +21,6 @@ public class MainFrame extends JFrame {
         switchTo("HomePage"); // 前往HomePage
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE); // 關閉視窗即退出程式
-
     }
 
     public void switchTo(String target) {
@@ -57,7 +56,6 @@ public class MainFrame extends JFrame {
 
     public void switchToGamingPage() {
         mp = new MusicPlayer("YEEYEEYEEYEEYEE");
-
         current = new GamingPage();
         add(current);
     }

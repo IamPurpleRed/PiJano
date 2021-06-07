@@ -25,6 +25,7 @@ public class controlls {
 	 public Component.Identifier old_id;//上次poll的按鈕名稱 應每10 pixel歸NULL
 	 public Component.Identifier first_id;
 	 public float old_data=(float)0.0;//上次poll的按鈕數值 應每10 pixel歸NULL
+	 public float mushroom_data=(float)0.0;
 	 public int line_y=869;//底線(上底)
 	 public int line_height=50;//底線厚度//應為40
 	 public int now_position_y=100;//目前底排位置(下底)//test_value
@@ -37,7 +38,7 @@ public class controlls {
 
 
 	 public int score = 0;//分數
-	 public String status=null;//perfect,good,bad,nothing
+	 public String status = "";//perfect,good,bad,nothing
 	 public double mushroom=800;//蘑菇頭位置(指針)
 
 	 
@@ -70,8 +71,7 @@ public class controlls {
 		first_id=id;
 		 do_timer();
 	 }
-	 
-	 
+	
 	public void do_timer()
 	 {
 		Timer timer = new Timer();
@@ -79,27 +79,27 @@ public class controlls {
 		{
 		public void run() {
 			
-			System.out.println(status+" "+mushroom+" "+if_scored);
+			//System.out.println(status+" "+mushroom+" "+if_scored);
 			//System.out.println(mushroom+" "+c+" "+old_id.toString()+" "+data+" "+count+" "+if_LB+" "+if_RB);
-			//System.out.println(target_buttons[0]+""+target_buttons[1]+""+target_buttons[2]+""+target_buttons[3]);
+			System.out.println(score+" "+target_buttons[0]+""+target_buttons[1]+""+target_buttons[2]+""+target_buttons[3]);
 			//System.out.println();//WTF
-			//System.out.println(score+" "+id.toString());
+			//System.out.println(score+" "+now_position_y);
 			controller.poll();//to event//
 			eq.getNextEvent(event);
 			com=event.getComponent();
-			if(old_id.toString()=="x"&&mushroom>=616&&mushroom<=1414&&Math.abs(old_data)>0.02
-			&&if_x==true)//for mushroom
+			
+			if(mushroom>=589&&mushroom<=1391&&Math.abs(mushroom_data)>0.02&&if_x==true)//for mushroom
 				{
 					c++;
-						mushroom+=old_data;
-						if(mushroom>=1414&&mushroom<1422)//越位
+						mushroom+=mushroom_data;
+						if(mushroom>=1391&&mushroom<1399)//越位
 						{
-							if(data>=0)
+							if(mushroom_data>=0)
 							mushroom-=6;
 						}
-						if(mushroom<=616&&mushroom>605)//越位
+						if(mushroom<=590&&mushroom>578)//越位
 						{
-							if(data<=0)
+							if(mushroom_data<=0)
 							mushroom+=6;
 						}
 					
@@ -111,7 +111,7 @@ public class controlls {
 				id=com.getIdentifier();
 				if(id.toString()=="x")//
 				{
-					if(Math.abs(data)>0.02)
+					if(Math.abs(mushroom_data)>0.02)
 					{
 						if_x=true;
 					}
@@ -126,6 +126,10 @@ public class controlls {
 				if(id.toString()!="ry"&&id.toString()!="rx"&&id.toString()!="rz"
 						&&id.toString()!="y"&&id.toString()!="z")//trigger進不來
 				{
+					if(id.toString()=="x")//for mushroom
+					{
+						mushroom_data=data;
+					}
 					data=com.getPollData();
 					//count++;
 					//System.out.println(mushroom+" "+c+""+data+" "+id.toString()+" "+if_LB+" "+if_RB);
@@ -181,27 +185,27 @@ public class controlls {
 				{
 					if(if_LB==true&&if_RB==true)//有沒有按RB,LB
 					{
-						if(target_buttons[3]=='2'&&mushroom>=1215&&mushroom<=1415)
+						if(target_buttons[3]=='2'&&mushroom>=1190&&mushroom<=1390)
 							{
 								if_scored=true;
 								score+=150;
 							}
 						
-						else if(target_buttons[2]=='2'&&mushroom>=1015&&mushroom<=1215)
+						else if(target_buttons[2]=='2'&&mushroom>=990&&mushroom<=1190)
 							{
 								if_scored=true;
 								score+=150;
 
 							}
 
-						else if(target_buttons[1]=='2'&&mushroom>=815&&mushroom<=1015)
+						else if(target_buttons[1]=='2'&&mushroom>=790&&mushroom<=990)
 							{
 								if_scored=true;
 								score+=150;
 
 							}
 
-						else if(target_buttons[0]=='2'&&mushroom>=615&&mushroom<=815)
+						else if(target_buttons[0]=='2'&&mushroom>=590&&mushroom<=790)
 							{
 								if_scored=true;
 								score+=150;
@@ -245,7 +249,6 @@ public class controlls {
 					}
 					
 					
-					
 				}
 				else if(now_position_y > 959&&if_have_stuff==true&&if_scored==false)//bad//底牌有東西
 
@@ -263,13 +266,6 @@ public class controlls {
 						if_have_stuff=false;
 						shift_next_line();
 			}
-				
-						
-					
-
-			
-			
-			 
 	}
 };
 

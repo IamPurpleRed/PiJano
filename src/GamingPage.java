@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.Timer;
 
 public class GamingPage extends JPanel {
-    final int block_interval = 110; //100 -> 110
+    final int block_interval = 110;         //TODO: 有改，鈺修負責 
     final int block_number = (1000 / block_interval + 3) * 4;
     final int dead_line_y = 1000 + block_interval;
     int current_load = block_number / 4;
@@ -36,10 +36,10 @@ public class GamingPage extends JPanel {
     JLabel EnemyScore_f = new JLabel();
     JLabel Combo_f = new JLabel();
     public Integer my_score = 0; //自己分數 
-    public Integer enemy_score = 1; //敵人分數 
-    public Integer combo = 1; //Combo數
-    public String perfect ; //choose effect perfect = status fron controlls
-    public Integer mushroom = 1000; //蘑菇頭位置
+    public Integer enemy_score = 0; //敵人分數 
+    public Integer combo = 0; //Combo數
+    public String perfect = ""; //choose effect perfect = status fron controlls
+    public Integer mushroom = 0; //蘑菇頭位置
 
     GamingPage() {
 
@@ -48,18 +48,17 @@ public class GamingPage extends JPanel {
         back.setOpaque(true);
         back.setBounds(0, 0, 1600, 1000);
         back.setBackground(new Color(0x123456));
+
         for (int i = 0; i < 4; i++) {
             rec = new JLabel(new ImageIcon("src/img/rect.png"));
             rec.setBounds(590 + 200 * i, 865, 200, 50);
             add(rec);
         }
-
-        setMOGU(mushroom);
+        setMOGU();
         add(Mogu_pos);
 
-        displayScoreImg(perfect);
+        displayScoreImg();
         add(Score_img);
-
         PaintScore(my_score, enemy_score, combo);
         add(MyScore);
         add(EnemyScore);
@@ -67,9 +66,10 @@ public class GamingPage extends JPanel {
         add(MyScore_f);
         add(EnemyScore_f);
         add(Combo_f);
-
+        
         add(back);
-        //System.out.printf("%d\n", block_number);
+        
+
         readfile(); //read sheet.txt to str array
         initial();
         check_if_buttom();
@@ -85,7 +85,6 @@ public class GamingPage extends JPanel {
     //     };
     //     t3.schedule(check_y, 0,5);
     //}
-
     public void PaintScore(Integer my, Integer en, Integer com) {
         Timer s = new Timer();
         TimerTask ss = new TimerTask() {
@@ -128,23 +127,27 @@ public class GamingPage extends JPanel {
         s.schedule(ss, 0, 1);
     }
 
-    public void displayScoreImg(String perfect) {
+    public void displayScoreImg() {
         Timer t6 = new Timer();
         TimerTask check_score = new TimerTask() {
 
             public void run() {
-                switch (perfect) {
-                    case "perfect":
+
+                int t = perfect.length();
+                switch (t) {
+                    case 7:
                         ImageIcon p = new ImageIcon("src/img/perfect.png");
                         Score_img.setIcon(p);
                         break;
-                    case "good":
+                    case 4:
                         ImageIcon g = new ImageIcon("src/img/good.png");
                         Score_img.setIcon(g);
                         break;
-                    case "bad":
+                    case 3:
                         ImageIcon b = new ImageIcon("src/img/bad.png");
                         Score_img.setIcon(b);
+                        break;
+                    default:                  
                         break;
                 }
                 Score_img.setBounds(300, 700, 300, 300);
@@ -153,7 +156,7 @@ public class GamingPage extends JPanel {
         t6.schedule(check_score, 0, 1);
     }
 
-    public void setMOGU(Integer mush) {
+    public void setMOGU() {
         /*
             第一軌道: 635,830
             第二軌道: 835,830
@@ -163,8 +166,8 @@ public class GamingPage extends JPanel {
         */
         Timer t5 = new Timer();
         TimerTask check_MOGU = new TimerTask() {
-            public void run() {
-                Mogu_pos.setBounds(mush, 830, 100, 100);
+            public void run() {               
+                Mogu_pos.setBounds(mushroom - 50, 830, 100, 100);
             }
         };
         t5.schedule(check_MOGU, 0, 1);
@@ -208,7 +211,7 @@ public class GamingPage extends JPanel {
     }
 
     public void paint(Graphics g) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
         Graphics2D g2D = (Graphics2D) g;
         super.paint(g);
 
@@ -217,6 +220,7 @@ public class GamingPage extends JPanel {
                 objects[i].paintBlock(g);
         }
         paintline(g);
+        
     }
 
     public void block(Stuff object) {
@@ -230,6 +234,8 @@ public class GamingPage extends JPanel {
         t2.schedule(ttt, 0, 5);
     }
 
+   
+    
     public void paintline(Graphics g) {
         Stroke stroke2 = new BasicStroke(20f);
         Graphics2D g2d_1 = (Graphics2D) g;
@@ -241,34 +247,41 @@ public class GamingPage extends JPanel {
         }
     }
 
+    
+
     public void check_if_buttom() {
         Timer t3 = new Timer();
         TimerTask check_y = new TimerTask() {
-
             public void run() {
+
                 //exchange
                 my_score=Main.ps4.score;
                 mushroom=(int)Main.ps4.mushroom;
                 perfect=Main.ps4.status;
                 Main.ps4.now_position_y=upper_str_ypos;//已加40
-                if(upper_str_ypos+40<Main.ps4.line_height||upper_str_ypos>959)//沒加40
+                if(upper_str_ypos+40<Main.ps4.line_height||upper_str_ypos>957)//沒加40
                 {
                     for(int i=0;i<4;i++)
                     {
                         Main.ps4.target_buttons[i]=upper_str.charAt(i);
                     }
-                    
-                }
-                
-                
-                //exchange
-                upper_str_ypos = (int) objects[temp].ypos+40;
+               }
 
+                //exchange
+
+
+
+
+
+                upper_str_ypos = (int) objects[temp].ypos+40;
+               // upper_str_ypos = 919 - (int) objects[temp].ypos;
                 if (objects[temp].ypos == 929) {
                     upper_str = str[cur];
                     temp += 4;
                     cur++;
                 }
+
+
                 if (temp >= block_number)
                     temp = 0;
                 if (index > 0) {
@@ -278,6 +291,7 @@ public class GamingPage extends JPanel {
                         index--;
                     }
                 }
+               
                 if (current_load < counter) {
                     for (int i = 0; i < counter; i++) {
                         int line = i % (block_number / 4); //第i列資料
@@ -289,7 +303,7 @@ public class GamingPage extends JPanel {
                                         index--;
                                     }
                                     trail_number.add(track + 4 * line);
-                                    objects[track + 4 * line].set_value(660 + 200 * track, -200, fall_speed);
+                                    objects[track + 4 * line].set_value(660 + 200 * track, -180, fall_speed);
                                     index++;
                                     drawblock[track + 4 * line] = false;
                                 } else if (str[current_load].charAt(track) == '1') {
