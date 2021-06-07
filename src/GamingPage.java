@@ -167,12 +167,37 @@ public class GamingPage extends JPanel {
         Timer t3 = new Timer();
         TimerTask check_y = new TimerTask() {
             public void run() {
+
+                //exchange
+               /// my_score=Main.ps4.score;
+                ///mushroom=(int)Main.ps4.mushroom;
+                ///perfect=Main.ps4.status;
+                // System.out.println(perfect);
+
+                Main.ps4.now_position_y=upper_str_ypos;//已加40
+                if(upper_str_ypos+40<Main.ps4.line_height||upper_str_ypos>959)//沒加40
+                {
+                    for(int i=0;i<4;i++)
+                    {
+                        Main.ps4.target_buttons[i]=upper_str.charAt(i);
+                    }
+               }
+
+                //exchange
+
+
+
+
+
+
                 upper_str_ypos = 919 - (int) objects[temp].ypos;
                 if (objects[temp].ypos == 919) {
                     upper_str = str[cur];
                     temp += 4;
                     cur++;
                 }
+
+
                 if (temp >= block_number)
                     temp = 0;
                 if (index > 0) {
@@ -182,6 +207,7 @@ public class GamingPage extends JPanel {
                         index--;
                     }
                 }
+               
                 if (current_load < counter) {
                     for (int i = 0; i < counter; i++) {
                         int line = i % (block_number / 4); //第i列資料
