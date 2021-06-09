@@ -21,6 +21,14 @@ public class MainFrame extends JFrame {
         switchTo("HomePage"); // 前往HomePage
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE); // 關閉視窗即退出程式
+        /*try{
+            Main.connect.send_score(2);
+            Main.connect.recv_score();
+            Main.connect.send_score(2);
+        }
+        catch(Exception ex){
+            System.out.println("Connect fail");
+        }*/
     }
 
     public void switchTo(String target) {

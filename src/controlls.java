@@ -7,7 +7,7 @@ import net.java.games.input.ControllerEnvironment;
 import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
 
-public class Controlls {
+class Controlls {
 
 	public Controller[] contral = ControllerEnvironment.getDefaultEnvironment().getControllers();
 	public Controller controller = null;
@@ -74,8 +74,8 @@ public class Controlls {
 
 				//System.out.println(status+" "+mushroom+" "+if_scored);
 				//System.out.println(mushroom+" "+c+" "+old_id.toString()+" "+data+" "+count+" "+if_LB+" "+if_RB);
-				System.out.println(score + " " + target_buttons[0] + "" + target_buttons[1] + "" + target_buttons[2]
-						+ "" + target_buttons[3] + " " + if_have_stuff + " " + if_scored);
+				//System.out.println(score + " " + target_buttons[0] + "" + target_buttons[1] + "" + target_buttons[2]
+				//		+ "" + target_buttons[3] + " " + if_have_stuff + " " + if_scored);
 				//System.out.println();//WTF
 				//System.out.println(score+" "+now_position_y);
 				controller.poll();//to event//

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.SocketException;
 import java.util.Random;
 
 public class HomePage extends JPanel {
@@ -65,7 +67,7 @@ public class HomePage extends JPanel {
         start_btn.setBorderPainted(false); // 除去button邊框
         start_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
+            public void actionPerformed(java.awt.event.ActionEvent e){
                 new FileChecker();
                 Main.PiJano.removePage(Main.PiJano.current, "SelectPage");
             }

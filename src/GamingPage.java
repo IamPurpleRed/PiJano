@@ -210,7 +210,6 @@ public class GamingPage extends JPanel {
     }
 
     public void paint(Graphics g) {
-
         Graphics2D g2D = (Graphics2D) g;
         super.paint(g);
 
@@ -246,6 +245,7 @@ public class GamingPage extends JPanel {
 
     public void check_if_buttom() {
         Timer t3 = new Timer();
+        Timer online_timer = new Timer();
         TimerTask check_y = new TimerTask() {
             public void run() {
 
@@ -260,7 +260,6 @@ public class GamingPage extends JPanel {
                         Main.ps4.target_buttons[i] = upper_str.charAt(i);
                     }
                 }
-
                 //exchange
 
                 upper_str_ypos = (int) objects[temp].ypos + 40;
@@ -269,6 +268,11 @@ public class GamingPage extends JPanel {
                     upper_str = str[cur];
                     temp += 4;
                     cur++;
+                    if(cur > counter)
+                    {
+                        t3.cancel();
+                        return;
+                    }
                 }
 
                 if (temp >= block_number)
@@ -297,7 +301,7 @@ public class GamingPage extends JPanel {
                                     drawblock[track + 4 * line] = false;
                                 } else if (str[current_load].charAt(track) == '1') {
                                     objects[track + 4 * line].set_value(620 + 200 * track, -200, fall_speed);
-                                } else {
+                                } else if (str[current_load].charAt(track) == '0'){
                                     objects[track + 4 * line].set_value(-200, -200, fall_speed);
                                 }
                             }
@@ -308,6 +312,20 @@ public class GamingPage extends JPanel {
                 }
             }
         };
+
+        TimerTask exchange = new TimerTask(){
+            public void run(){
+                try{
+                    Main.connect.send_score(my_score);
+                    System.out.println(cur);
+                    enemy_score = Main.connect.recv_score();
+                }
+                catch(Exception ex){
+                    System.out.println("exchange fail");
+                }
+            }
+        };
         t3.schedule(check_y, 0, 1);
+        online_timer.schedule(exchange, 0 , 100);
     }
 }
