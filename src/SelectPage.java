@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class SelectPage extends JPanel {
-    JLabel background = new JLabel(new ImageIcon("src/img/bg_homepage.png"));
+    JLabel background = new JLabel(new ImageIcon("src/img/bg_SelectPage.png"));
     JLabel title = new JLabel();
     Integer page = 1; // 顯示當前頁數
     JLabel page_text = new JLabel();

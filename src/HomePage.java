@@ -41,7 +41,7 @@ public class HomePage extends JPanel {
         }
     }
 
-    JLabel background = new JLabel(new ImageIcon("src/img/bg_homepage.png"));
+    JLabel background = new JLabel(new ImageIcon("src/img/bg_Homepage.jpg"));
     JLabel game_name = new JLabel();
     JLabel loading_gif = new JLabel(new ImageIcon("src/img/loading.gif"));
     JLabel loading_text = new JLabel();
@@ -60,8 +60,8 @@ public class HomePage extends JPanel {
         loading_text.setForeground(Color.WHITE);
         bottomwave_gif.setBounds(50, 700, 1000, 400);
 
-        start_btn.setIcon(new ImageIcon("src/img/roller.png"));
-        start_btn.setBounds(1200, 200, 234, 150);
+        
+        start_btn.setBounds(100,450,580,150);
         start_btn.setOpaque(false); // 顯示出來
         start_btn.setContentAreaFilled(false); // 背景透明
         start_btn.setBorderPainted(false); // 除去button邊框

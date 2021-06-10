@@ -85,7 +85,7 @@ class Controlls {
 				if (mushroom >= 589 && mushroom <= 1391 && Math.abs(mushroom_data) > 0.02 && if_x == true)//for mushroom
 				{
 					c++;
-					mushroom += mushroom_data;
+					mushroom += mushroom_data*2;
 					if (mushroom >= 1391 && mushroom < 1399)//越位
 					{
 						if (mushroom_data >= 0)

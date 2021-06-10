@@ -26,7 +26,9 @@ public class GamingPage extends JPanel {
     int cur = 1;
     //以下是元
     JLabel back = new JLabel();
-    JLabel Mogu_pos = new JLabel(new ImageIcon("src/img/MOGU.png"));
+    JLabel Mogu = new JLabel(new ImageIcon("src/img/MOGU_pink.png"));
+    JLabel Mogu_pink = new JLabel(new ImageIcon("src/img/MOGU_pink.png"));
+    JLabel Mogu_green = new JLabel(new ImageIcon("src/img/MOGU_green.png"));
     JLabel Score_img = new JLabel();
     JLabel rec = new JLabel();
     JLabel MyScore = new JLabel();
@@ -49,16 +51,10 @@ public class GamingPage extends JPanel {
         back.setBounds(0, 0, 1600, 1000);
         back.setBackground(new Color(0x123456));
 
-        for (int i = 0; i < 4; i++) {
-            rec = new JLabel(new ImageIcon("src/img/rect.png"));
-            rec.setBounds(590 + 200 * i, 865, 200, 50);
-            add(rec);
-        }
-        setMOGU();
-        add(Mogu_pos);
-
         displayScoreImg();
         add(Score_img);
+        setMOGU();
+        add(Mogu);
         PaintScore(my_score, enemy_score, combo);
         add(MyScore);
         add(EnemyScore);
@@ -67,6 +63,11 @@ public class GamingPage extends JPanel {
         add(EnemyScore_f);
         add(Combo_f);
 
+        for (int i = 0; i < 4; i++) {
+            rec = new JLabel(new ImageIcon("src/img/rect.png"));
+            rec.setBounds(590 + 200 * i, 865, 200, 50);
+            add(rec);
+        }
         add(back);
 
         readfile(); //read sheet.txt to str array
@@ -166,7 +167,15 @@ public class GamingPage extends JPanel {
         Timer t5 = new Timer();
         TimerTask check_MOGU = new TimerTask() {
             public void run() {
-                Mogu_pos.setBounds(mushroom - 50, 830, 100, 100);
+                if (Main.ps4.if_LB && Main.ps4.if_RB){
+                    Icon icon = new ImageIcon("src/img/MOGU_green.png");
+                    Mogu.setIcon(icon);                   
+                }
+                else {
+                    Icon icon = new ImageIcon("src/img/MOGU_pink.png");
+                    Mogu.setIcon(icon);                   
+                }
+                Mogu.setBounds(mushroom - 50, 830, 100, 100);
             }
         };
         t5.schedule(check_MOGU, 0, 1);
