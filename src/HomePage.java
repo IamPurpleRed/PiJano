@@ -12,10 +12,8 @@ public class HomePage extends JPanel {
         int loadingText_x = 1240;
         int loadingText_y = 860;
         int loadingText_x_speed = 3;
-        int loadingText_y_speed = 5;
         int game_name_x = 100;
         int game_name_y = 450;
-        int game_name_x_speed = 3;
         int game_name_y_speed = 5;
 
         @Override
@@ -37,7 +35,7 @@ public class HomePage extends JPanel {
 
             loading_text.setBounds(loadingText_x, loadingText_y, 500, 100);
             game_name.setBounds(game_name_x, game_name_y, 580, 150);
-
+            start_btn.setBounds(game_name_x,game_name_y,580,150);
         }
     }
 
@@ -60,8 +58,6 @@ public class HomePage extends JPanel {
         loading_text.setForeground(Color.WHITE);
         bottomwave_gif.setBounds(50, 700, 1000, 400);
 
-        
-        start_btn.setBounds(100,450,580,150);
         start_btn.setOpaque(false); // 顯示出來
         start_btn.setContentAreaFilled(false); // 背景透明
         start_btn.setBorderPainted(false); // 除去button邊框
