@@ -10,6 +10,8 @@ public class MainFrame extends JFrame {
     public ArrayList<String> available_list = new ArrayList<String>();
     public String now_playing;
     public MusicPlayer mp;
+    public Integer Final_M_Score;
+    public Integer Final_E_Score;
 
     MainFrame() {
         setTitle("P i J a n o");
@@ -42,11 +44,14 @@ public class MainFrame extends JFrame {
             case "GamingPage":
                 switchToGamingPage();
                 break;
+            case "FinishPage":
+                switchToFinishPage();
+                break;
         }
     }
 
     public void removePage(JPanel panel, String target) {
-        panel.removeAll();
+        this.getContentPane().removeAll();
         switchTo(target);
         current.repaint();
         current.revalidate();
@@ -65,6 +70,11 @@ public class MainFrame extends JFrame {
     public void switchToGamingPage() {
         mp = new MusicPlayer(now_playing);
         current = new GamingPage();
+        add(current);
+    }
+
+    public void switchToFinishPage() {
+        current = new FinishPage();
         add(current);
     }
 }
