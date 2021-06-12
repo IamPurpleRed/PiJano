@@ -12,12 +12,12 @@ public class GamingPage extends JPanel {
     int current_load = block_number / 4;
     ArrayList<Integer> trail_number = new ArrayList<Integer>();
     Stuff objects[] = new Stuff[block_number];
-    String str[] = new String[100];
+    String str[] = new String[500];
     boolean drawblock[] = new boolean[block_number];
     int index = 0;
     int counter = 0;
     int status = 0;
-    double fall_speed = 1;
+    double fall_speed = 2;
     Stroke stroke1 = new BasicStroke(6f);
     int upper_upper_str;
     public int upper_str_ypos = 0;
