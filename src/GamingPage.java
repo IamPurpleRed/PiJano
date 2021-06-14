@@ -26,20 +26,15 @@ public class GamingPage extends JPanel {
     int cur = 1;
     //以下是元
     JLabel back = new JLabel();
-    JLabel Mogu = new JLabel(new ImageIcon("src/img/MOGU_pink.png"));
-    JLabel Mogu_pink = new JLabel(new ImageIcon("src/img/MOGU_pink.png"));
-    JLabel Mogu_green = new JLabel(new ImageIcon("src/img/MOGU_green.png"));
+    JLabel Mogu = new JLabel();
     JLabel Score_img = new JLabel();
     JLabel rec = new JLabel();
     JLabel MyScore = new JLabel();
     JLabel EnemyScore = new JLabel();
-    JLabel Combo = new JLabel();
     JLabel MyScore_f = new JLabel();
     JLabel EnemyScore_f = new JLabel();
-    JLabel Combo_f = new JLabel();
     public Integer my_score = 0; //自己分數 
     public Integer enemy_score = 0; //敵人分數 
-    public Integer combo = 0; //Combo數
     public String perfect = ""; //choose effect perfect = status fron controlls
     public Integer mushroom = 0; //蘑菇頭位置
 
@@ -55,13 +50,11 @@ public class GamingPage extends JPanel {
         add(Score_img);
         setMOGU();
         add(Mogu);
-        PaintScore(my_score, enemy_score, combo);
+        PaintScore(my_score, enemy_score);
         add(MyScore);
         add(EnemyScore);
-        add(Combo);
         add(MyScore_f);
         add(EnemyScore_f);
-        add(Combo_f);
 
         for (int i = 0; i < 4; i++) {
             rec = new JLabel(new ImageIcon("src/img/rect.png"));
@@ -85,7 +78,7 @@ public class GamingPage extends JPanel {
     //     };
     //     t3.schedule(check_y, 0,5);
     //}
-    public void PaintScore(Integer my, Integer en, Integer com) {
+    public void PaintScore(Integer my, Integer en) {
         Timer s = new Timer();
         TimerTask ss = new TimerTask() {
             @Override
@@ -102,12 +95,6 @@ public class GamingPage extends JPanel {
                 EnemyScore.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 100));
                 EnemyScore.setBounds(260, 70, 500, 200);
 
-                combo += com;
-                Combo.setText(combo.toString());
-                Combo.setForeground(new Color(0x154354)); //0x587587
-                Combo.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 100));
-                Combo.setBounds(300, 370, 500, 200);
-
                 MyScore_f.setText("Score _____");
                 MyScore_f.setForeground(Color.CYAN); //0x587587
                 MyScore_f.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 80));
@@ -117,11 +104,6 @@ public class GamingPage extends JPanel {
                 EnemyScore_f.setForeground(Color.RED); //0x587587
                 EnemyScore_f.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 80));
                 EnemyScore_f.setBounds(100, 100, 500, 200);
-
-                Combo_f.setText("Combo ___");
-                Combo_f.setForeground(new Color(0x154354)); //0x587587
-                Combo_f.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 80));
-                Combo_f.setBounds(100, 400, 500, 200);
             }
         };
         s.schedule(ss, 0, 1);
@@ -167,13 +149,12 @@ public class GamingPage extends JPanel {
         Timer t5 = new Timer();
         TimerTask check_MOGU = new TimerTask() {
             public void run() {
-                if (Main.ps4.if_LB && Main.ps4.if_RB){
+                if (Main.ps4.if_LB && Main.ps4.if_RB) {
                     Icon icon = new ImageIcon("src/img/MOGU_green.png");
-                    Mogu.setIcon(icon);                   
-                }
-                else {
+                    Mogu.setIcon(icon);
+                } else {
                     Icon icon = new ImageIcon("src/img/MOGU_pink.png");
-                    Mogu.setIcon(icon);                   
+                    Mogu.setIcon(icon);
                 }
                 Mogu.setBounds(mushroom - 50, 830, 100, 100);
             }
@@ -277,9 +258,11 @@ public class GamingPage extends JPanel {
                     upper_str = str[cur];
                     temp += 4;
                     cur++;
-                    if(cur > counter)
-                    {
+                    if (cur > counter) {
                         t3.cancel();
+                        Main.PiJano.Final_M_Score = my_score;
+                        Main.PiJano.Final_E_Score = enemy_score;
+                        Main.PiJano.removePage(Main.PiJano.current, "FinishPage");
                         return;
                     }
                 }
@@ -310,7 +293,7 @@ public class GamingPage extends JPanel {
                                     drawblock[track + 4 * line] = false;
                                 } else if (str[current_load].charAt(track) == '1') {
                                     objects[track + 4 * line].set_value(620 + 200 * track, -200, fall_speed);
-                                } else if (str[current_load].charAt(track) == '0'){
+                                } else if (str[current_load].charAt(track) == '0') {
                                     objects[track + 4 * line].set_value(-200, -200, fall_speed);
                                 }
                             }
@@ -322,19 +305,18 @@ public class GamingPage extends JPanel {
             }
         };
 
-        TimerTask exchange = new TimerTask(){
-            public void run(){
-                try{
+        TimerTask exchange = new TimerTask() {
+            public void run() {
+                try {
                     Main.connect.send_score(my_score);
                     System.out.println(cur);
                     enemy_score = Main.connect.recv_score();
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     System.out.println("exchange fail");
                 }
             }
         };
         t3.schedule(check_y, 0, 1);
-        online_timer.schedule(exchange, 0 , 100);
+        online_timer.schedule(exchange, 0, 100);
     }
 }

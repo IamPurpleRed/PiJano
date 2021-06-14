@@ -4,8 +4,8 @@ import java.awt.*;
 public class FinishPage extends JPanel {
 
     JLabel background = new JLabel(new ImageIcon("src/img/gameover.jpg"));
-    JLabel MyScore = new JLabel();
-    JLabel Champion = new JLabel(new ImageIcon("src/img/unnamed.png"));
+    JLabel Winner = new JLabel();
+    JLabel Champion = new JLabel(new ImageIcon("src/img/winner.png"));
 
     FinishPage() {
         setLayout(null);
@@ -14,13 +14,17 @@ public class FinishPage extends JPanel {
 
         Champion.setBounds(160, 100, 400, 300);
 
-        MyScore.setText(Main.PiJano.Final_M_Score.toString());
-        MyScore.setForeground(Color.YELLOW);
-        MyScore.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 150));
-        MyScore.setBounds(600, 120, 500, 300);
+        if (Main.PiJano.Final_M_Score >= Main.PiJano.Final_E_Score) {
+            Winner.setText(Main.PiJano.Final_M_Score.toString());
+        } else {
+            Winner.setText(Main.PiJano.Final_E_Score.toString());
+        }
+        Winner.setForeground(Color.YELLOW);
+        Winner.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 150));
+        Winner.setBounds(600, 120, 500, 300);
 
         add(Champion);
-        add(MyScore);
+        add(Winner);
         add(background);
 
     }
