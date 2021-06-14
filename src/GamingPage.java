@@ -238,7 +238,7 @@ public class GamingPage extends JPanel {
         Timer online_timer = new Timer();
         TimerTask check_y = new TimerTask() {
             public void run() {
-
+                /*
                 //exchange
                 my_score = Main.ps4.score;
                 mushroom = (int) Main.ps4.mushroom;
@@ -251,7 +251,7 @@ public class GamingPage extends JPanel {
                     }
                 }
                 //exchange
-
+                */
                 upper_str_ypos = (int) objects[temp].ypos + 40;
                 // upper_str_ypos = 919 - (int) objects[temp].ypos;
                 if (objects[temp].ypos >= 929) {
