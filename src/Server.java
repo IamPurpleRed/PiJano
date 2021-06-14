@@ -12,7 +12,7 @@ class Packet implements Serializable {
 class Server{
     DatagramSocket dSock;
     DatagramPacket packet;                                          //開啟順序有差 一定要先講好誰先啟動
-    InetAddress address = InetAddress.getByName("192.168.137.234"); // 兩個玩家要連內網並輸入對方ipv4
+    InetAddress address = InetAddress.getByName("192.168.137.22"); // 兩個玩家要連內網並輸入對方ipv4
     int port = 8086;
     Server() throws Exception{
         System.out.println("run");

@@ -98,12 +98,12 @@ public class GamingPage extends JPanel {
                 MyScore_f.setText("Score _____");
                 MyScore_f.setForeground(Color.CYAN); //0x587587
                 MyScore_f.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 80));
-                MyScore_f.setBounds(100, 200, 500, 200);
+                MyScore_f.setBounds(80, 180, 500, 200);
 
                 EnemyScore_f.setText("Score _____");
                 EnemyScore_f.setForeground(Color.RED); //0x587587
                 EnemyScore_f.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 80));
-                EnemyScore_f.setBounds(100, 100, 500, 200);
+                EnemyScore_f.setBounds(80, 80, 500, 200);
             }
         };
         s.schedule(ss, 0, 1);
@@ -238,7 +238,7 @@ public class GamingPage extends JPanel {
         Timer online_timer = new Timer();
         TimerTask check_y = new TimerTask() {
             public void run() {
-                /*
+                
                 //exchange
                 my_score = Main.ps4.score;
                 mushroom = (int) Main.ps4.mushroom;
@@ -251,9 +251,8 @@ public class GamingPage extends JPanel {
                     }
                 }
                 //exchange
-                */
+                
                 upper_str_ypos = (int) objects[temp].ypos + 40;
-                // upper_str_ypos = 919 - (int) objects[temp].ypos;
                 if (objects[temp].ypos >= 929) {
                     upper_str = str[cur];
                     temp += 4;

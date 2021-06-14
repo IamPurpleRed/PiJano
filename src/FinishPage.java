@@ -32,11 +32,11 @@ public class FinishPage extends JPanel {
             Lose.setText(Main.PiJano.Final_E_Score.toString());
         } else {
             Winner.setText(Main.PiJano.Final_E_Score.toString());
-            Winner_f.setText("2P ");
+            Winner_f.setText("1P ");
             Winner_f.setForeground(Color.YELLOW);
             Winner_f.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 100));
             Winner_f.setBounds(450, 0, 500, 300);
-            Lose_f.setText("1P ");
+            Lose_f.setText("2P ");
             Lose_f.setForeground(Color.RED);
             Lose_f.setFont(new Font("Playlist", Font.ROMAN_BASELINE, 100));
             Lose_f.setBounds(300, 220, 500, 300);
