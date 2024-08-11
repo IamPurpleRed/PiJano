@@ -25,3 +25,7 @@ PiJano
 - **搖桿操控**: 遊戲可以用搖桿操控
 - **遊戲玩法**: 介面仿照鋼琴塊，分成**四個區域**對應搖桿的 左鍵, 右鍵, 正方形鍵, 圓形鍵，如果是**連打(滑行)** 則需要利用 R1 或 R2 搭配蘑菇頭
 ![](https://i.imgur.com/d2R34Bk.png)
+
+
+https://github.com/user-attachments/assets/4b25cad0-8c55-4e5a-88e5-51bd825a2ecb
+
